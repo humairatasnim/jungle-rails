@@ -5,8 +5,11 @@ describe('jungle rails app', () => {
   it("There are products on the page", () => {
     cy.get(".products article").should("be.visible");
   });
-  it("Navigates to product detail page", () => {
-    cy.get(".products article").first().click();
-    cy.get(".product-detail").should("be.visible");
+  it ("Cart increases by one", () => {
+    cy.get(".products article").first().find("button")
+      .click( {force: true} )
+      .then(() => {
+        cy.get(".navbar").contains("My Cart (1)")
+      })
   });
 })
